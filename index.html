@@ -232,12 +232,23 @@
 
     const input = document.querySelector("input#cpr")
     input.addEventListener("input", (ev)=>{
-       
+       console.log(input.value.length)
         if (input.value.length == 6 && ev.inputType != "deleteContentBackward"){
             input.value = input.value + "-"
+            console.log("kører")
+            ev.preventDefault()
         }else if(input.value.length == 12){
           input.value = input.value.slice(0,11)
 
+        }
+
+        if(input.value.length == 7 && input.value.includes("-") == false){
+           let splittetString = input.value.split("")
+           let skrevetTal = splittetString[6]
+           splittetString[7] = splittetString[6]
+
+           splittetString[6] = "-"
+          input.value = splittetString.join("")
         }
        
     })
